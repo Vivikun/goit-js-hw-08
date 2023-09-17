@@ -17,4 +17,3 @@ const lightbox = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
 });
 console.log(galleryItems);
-// moja gale
