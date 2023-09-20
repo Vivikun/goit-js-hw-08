@@ -14,7 +14,7 @@ player.on('timeupdate', savePlaybackTime);
 async function resumePlayback() {
   try {
     const savedTime = localStorage.getItem('videoplayer-current-time');
-    if (savedTime !== null) {
+    if (savedTime) {
       await player.setCurrentTime(parseFloat(savedTime));
     }
   } catch (error) {

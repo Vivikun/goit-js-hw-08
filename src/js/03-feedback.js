@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const emailInput = document.querySelector('input[name="email"]');
   const messageInput = document.querySelector('textarea[name="message"]');
+  const formularz = document.querySelector('.feedback-form');
 
   emailInput.addEventListener('input', () => {
     saveStateToLocalStorage();
@@ -27,17 +28,26 @@ document.addEventListener('DOMContentLoaded', function () {
     saveStateToLocalStorage();
   });
 
-  const formularz = document.querySelector('.feedback-form');
   formularz.addEventListener('submit', function (e) {
     e.preventDefault();
+
+    // Dodaj walidację pól formularza
+    const emailValue = emailInput.value.trim();
+    const messageValue = messageInput.value.trim();
+
+    if (!emailValue || !messageValue) {
+      alert('Please complete all form fields.');
+      return;
+    }
     localStorage.removeItem('feedback-form-state');
     emailInput.value = '';
     messageInput.value = '';
+    const formData = { email: emailValue, message: messageValue };
+    console.log('Data from the form:', formData);
 
-    const storedData = localStorage.getItem('feedback-form-state');
-    console.log('Data in local storage after sending the form:', storedData);
-
-    alert('The data has been sent, the local storage has been wiped.');
+    alert(
+      'The data has been sent and the data in the local storage has been deleted.'
+    );
   });
 
   window.addEventListener('load', fillFormFromLocalStorage);
